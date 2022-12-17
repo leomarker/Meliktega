@@ -1,9 +1,18 @@
-const express = require("express"),
-  PORT = 5000,
-  app = express();
+const bodyParser = require("body-parser");
+const express = require("express");
+const mongoConnect = require("./util/db").mongoConnect;
 
-app.get("/api/v1", (req, res) => {
-  res.send("hello !!!!");
+const authRoutes = require("./routes/authRoutes");
+
+const app = express();
+const PORT = "8080";
+
+app.use(bodyParser.json({ extended: false }));
+
+app.use(authRoutes);
+
+mongoConnect((client) => {
+  app.listen(PORT, () => {
+    console.log("server listening at port 8080");
+  });
 });
-
-app.listen(PORT, () => console.log(`start listening on port : ${PORT}`));
