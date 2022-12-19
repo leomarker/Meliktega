@@ -12,12 +12,6 @@ app.use(bodyParser.json({ extended: false }));
 
 app.use(authRoutes);
 
-// mongoConnect((client) => {
-//   app.listen(PORT, () => {
-//     console.log("server listening at port 5000");
-//   });
-// });
-
 mongoose
   .connect("mongodb://127.0.0.1:27017/melktega")
   .then(() => {

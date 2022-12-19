@@ -32,7 +32,7 @@ exports.postLogin = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  const user = User.findOne({ email: email });
+  const user = await User.findOne({ email: email });
 
   if (user) {
     const auth = await bcrypt.compare(password, user.password);
