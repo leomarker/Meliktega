@@ -1,27 +1,19 @@
 const User = require("../model/authModel");
 
-exports.postSignup = (req, res, next) => {
-  const user = new User(
-    req.body.email,
-    req.body.password,
-    req.body.confirmPassword
-  );
-  // const userExist = async () => {
-  //   return await user
-  //     .findOne(req.body.email)
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch();
-  // };
-  const userExist = user
-    .findOne(req.body.email)
-    .then((res) => {
-      console.log(res);
-    })
-    .catch();
-  console.log(userExist);
+const bcrypt = require("bcrypt");
+const { reset } = require("nodemon");
+
+exports.postSignup = async (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  const confirmPassword = req.body.confirmPassword;
+
+  const userExist = await User.findOne({ email: email });
+
   if (userExist === null) {
+    const hashedPWD = await bcrypt.hash(password, 12);
+
+    const user = new User({ email: email, password: hashedPWD });
     user
       .save()
       .then((res) => {
@@ -34,6 +26,22 @@ exports.postSignup = (req, res, next) => {
   } else {
     res.send("user exists");
   }
+};
 
-  // res.send("done");
+exports.postLogin = async (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  const user = User.findOne({ email: email });
+
+  if (user) {
+    const auth = await bcrypt.compare(password, user.password);
+    if (auth) {
+      res.status("200").send("login was authenticated");
+    } else {
+      res.send("invalid password or email combination");
+    }
+  } else {
+    res.send("no user found with this email");
+  }
 };

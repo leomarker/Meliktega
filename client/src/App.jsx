@@ -16,7 +16,7 @@ function App() {
           <Route path="login" element={<Auth />} />
           <Route path="signup" element={<Signup />} />
           <Route path="/setprofile" element={<SetProfile />} />
-          <Route path="/l" element={<ChatUi />} />
+          <Route path="/f" element={<ChatUi />} />
         </Routes>
       </BrowserRouter>
     </div>
