@@ -1,7 +1,7 @@
 const User = require("../model/authModel");
 
 const bcrypt = require("bcrypt");
-const { reset } = require("nodemon");
+const jwt = require("jsonwebtoken");
 
 exports.postSignup = async (req, res, next) => {
   const email = req.body.email;
@@ -29,15 +29,17 @@ exports.postSignup = async (req, res, next) => {
 };
 
 exports.postLogin = async (req, res, next) => {
-  const email = req.body.email;
-  const password = req.body.password;
+  const { email, password } = req.body;
 
   const user = await User.findOne({ email: email });
 
   if (user) {
     const auth = await bcrypt.compare(password, user.password);
     if (auth) {
-      res.status("200").send("login was authenticated");
+      const payload = { email };
+      const secret = "thisisjustasecreat";
+      const token = jwt.sign(payload, secret, { expiresIn: "1h" });
+      res.cookie("token", token, { httpOnly: true }).sendStatus(200);
     } else {
       res.send("invalid password or email combination");
     }

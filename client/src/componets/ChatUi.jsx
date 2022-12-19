@@ -26,9 +26,12 @@ const ChatUi = () => {
       </div>
       <div className="w-[100%] h-[90%] flex">
         <div className="w-[30%] h-full">
-          <div className="float-right flex mt-[30px]">
-            <input type="text" />
-            <div>search</div>
+          <div className="flex mt-[30px]">
+            <input
+              type="text"
+              className="w-[60%] h-[30px] p-[15px] rounded-2xl "
+              placeholder="search"
+            />
           </div>
         </div>
         <div className=" w-[70%] h-full flex flex-col-reverse">
