@@ -8,7 +8,7 @@ const authRoutes = require("./routes/authRoutes");
 const app = express();
 const PORT = "5000";
 
-app.use(bodyParser.json({ extended: false }));
+app.use(express.json({ extended: false }));
 
 app.use(authRoutes);
 

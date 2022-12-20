@@ -39,11 +39,14 @@ exports.postLogin = async (req, res, next) => {
       const payload = { email };
       const secret = "thisisjustasecreat";
       const token = jwt.sign(payload, secret, { expiresIn: "1h" });
-      res.cookie("token", token, { httpOnly: true }).sendStatus(200);
+      res.send({ auth: true, token: token });
     } else {
-      res.send("invalid password or email combination");
+      res.send({
+        auth: false,
+        message: "invalid password or email combination",
+      });
     }
   } else {
-    res.send("no user found with this email");
+    res.send({ auth: false, message: "no user found with this email" });
   }
 };

@@ -1,13 +1,14 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import SocialIcons from "./SocialIcons";
 
 const Auth = () => {
   const [email, setemail] = useState();
   const [password, setpassword] = useState();
+  const Navigate = useNavigate();
 
   const handleSubmit = (e) => {
     console.log("send some data");
@@ -18,7 +19,11 @@ const Auth = () => {
         password: password,
       })
       .then(function (response) {
-        console.log(response);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("auth", response.data.auth);
+        console.log(localStorage.getItem("auth") + "nati");
+
+        Navigate(localStorage.getItem("auth") ? "/setprofile" : "/login");
       })
       .catch(function (error) {
         console.log(error);

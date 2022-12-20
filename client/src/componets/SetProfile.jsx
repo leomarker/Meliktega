@@ -1,6 +1,6 @@
 import React from "react";
 
-const SetProfile = () => {
+const SetProfile = ({ username, setUsername, socket }) => {
   return (
     <div className="flex justify-center items-center h-[100vh]">
       <div className="h-[600px] w-[800px] flex justify-center items-center bg-black rounded-2xl flex-col">
@@ -10,6 +10,7 @@ const SetProfile = () => {
             type="text"
             placeholder="Name"
             className="w-[400px] h-[40px] mb-[20px] rounded-xl p-[10px]"
+            onChange={(e) => setUsername(e.target.value)}
           />
           <input
             type="text"
