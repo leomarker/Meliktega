@@ -6,6 +6,7 @@ import Auth from "./componets/Auth";
 import Signup from "./componets/Signup";
 import SetProfile from "./componets/SetProfile";
 import ChatUi from "./componets/ChatUi";
+import PrivateRoutes from "./componets/PrivateRoutes";
 
 function App() {
   return (
@@ -15,8 +16,10 @@ function App() {
           <Route path="/" element={<Welcome />} />
           <Route path="login" element={<Auth />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="/setprofile" element={<SetProfile />} />
-          <Route path="/chat" element={<ChatUi />} />
+          <Route element={<PrivateRoutes />}>
+            <Route path="/setprofile" element={<SetProfile />} />
+            <Route path="/chat" element={<ChatUi />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
