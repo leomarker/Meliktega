@@ -23,8 +23,9 @@ exports.postSignup = async (req, res, next) => {
         console.log(err);
       });
     console.log("got a hit");
+    res.status(201).json({ msg: "User created", redirect: true });
   } else {
-    res.send("user exists");
+    res.json({ msg: "User exists" });
   }
 };
 
@@ -32,6 +33,7 @@ exports.postLogin = async (req, res, next) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email: email });
+  console.log(user);
 
   if (user) {
     const auth = await bcrypt.compare(password, user.password);

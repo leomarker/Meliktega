@@ -9,10 +9,10 @@ import SetProfile from "./componets/SetProfile";
 import ChatUi from "./componets/ChatUi";
 import PrivateRoutes from "./componets/PrivateRoutes";
 
-const socket = io.connect("http://localhost:5000");
+// const socket = io.connect("http://localhost:5000");
 
 function App() {
-  const [username, setUsername] = useState("");
+  // const [username, setUsername] = useState("");
 
   return (
     <div className="App">
@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<Welcome />} />
           <Route path="login" element={<Auth />}></Route>
 
-          <Route
+          {/* <Route
             path="/setprofile"
             username={username}
             setUsername={setUsername}
@@ -34,7 +34,7 @@ function App() {
             setUsername={setUsername}
             socket={socket}
             element={<ChatUi />}
-          />
+          /> */}
 
           <Route path="signup" element={<Signup />} />
         </Routes>
