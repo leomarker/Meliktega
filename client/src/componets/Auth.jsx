@@ -8,6 +8,8 @@ import SocialIcons from "./SocialIcons";
 const Auth = () => {
   const [email, setemail] = useState();
   const [password, setpassword] = useState();
+  const [auth, setAuth] = useState(false);
+
   const Navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -20,10 +22,14 @@ const Auth = () => {
       })
       .then(function (response) {
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("auth", response.data.auth);
-        console.log(localStorage.getItem("auth") + "nati");
-
-        Navigate(localStorage.getItem("auth") ? "/setprofile" : "/login");
+        localStorage.setItem("auth", response.data.login);
+        console.log(response.data.login);
+        console.log(response.data.login);
+        setAuth(response.data.login);
+        console.log(auth);
+        if (auth) {
+          Navigate("/setprofile", { replace: true });
+        }
       })
       .catch(function (error) {
         console.log(error);

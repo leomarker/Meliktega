@@ -21,20 +21,20 @@ function App() {
           <Route path="/" element={<Welcome />} />
           <Route path="login" element={<Auth />}></Route>
 
-          {/* <Route
+          <Route
             path="/setprofile"
-            username={username}
-            setUsername={setUsername}
-            socket={socket}
+            // username={username}
+            // setUsername={setUsername}
+            // socket={socket}
             element={<SetProfile />}
           />
           <Route
             path="/chat"
-            username={username}
-            setUsername={setUsername}
-            socket={socket}
+            // username={username}
+            // setUsername={setUsername}
+            // socket={socket}
             element={<ChatUi />}
-          /> */}
+          />
 
           <Route path="signup" element={<Signup />} />
         </Routes>

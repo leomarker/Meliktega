@@ -36,19 +36,28 @@ exports.postLogin = async (req, res, next) => {
   console.log(user);
 
   if (user) {
-    const auth = await bcrypt.compare(password, user.password);
-    if (auth) {
-      const payload = { email };
-      const secret = "thisisjustasecreat";
-      const token = jwt.sign(payload, secret, { expiresIn: "1h" });
-      res.send({ auth: true, token: token });
-    } else {
-      res.send({
-        auth: false,
-        message: "invalid password or email combination",
+    console.log("nati");
+    bcrypt
+      .compare(password, user.password)
+      .then((match) => {
+        if (match === true) {
+          const payload = { email };
+          const secret = "thisisjustasecreat";
+          const token = jwt.sign(payload, secret, { expiresIn: "1h" });
+          console.log("jwt");
+          return res.send({ login: true, token: token });
+        } else {
+          console.log("cool");
+          return res.send({
+            auth: false,
+            message: "invalid password or email combination",
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    }
   } else {
-    res.send({ auth: false, message: "no user found with this email" });
+    return res.send({ auth: false, message: "no user found with this email" });
   }
 };
