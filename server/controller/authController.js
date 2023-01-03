@@ -49,7 +49,7 @@ exports.postLogin = async (req, res, next) => {
         } else {
           console.log("cool");
           return res.send({
-            auth: false,
+            login: false,
             message: "invalid password or email combination",
           });
         }
@@ -58,6 +58,6 @@ exports.postLogin = async (req, res, next) => {
         console.log(err);
       });
   } else {
-    return res.send({ auth: false, message: "no user found with this email" });
+    return res.send({ login: false, message: "no user found with this email" });
   }
 };

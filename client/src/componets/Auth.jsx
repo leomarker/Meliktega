@@ -10,7 +10,7 @@ const Auth = () => {
   const [email, setemail] = useState();
   const [password, setpassword] = useState();
   // const [auth, setAuth] = useState(false);
-  const Auth = useAuth();
+  const auth = useAuth();
 
   const Navigate = useNavigate();
 
@@ -36,7 +36,8 @@ const Auth = () => {
     //   .catch(function (error) {
     //     console.log(error);
     //   });
-    const check = await Auth.login(email, password);
+    const check = await auth.login(email, password);
+    console.log(check);
     if (check) {
       Navigate("/setprofile");
     }

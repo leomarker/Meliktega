@@ -8,7 +8,7 @@ import Signup from "./componets/Signup";
 import SetProfile from "./componets/SetProfile";
 import ChatUi from "./componets/ChatUi";
 import PrivateRoutes from "./componets/PrivateRoutes";
-import { AuthProvider, useAuth } from "./hooks/useAuth";
+import { AuthProvider } from "./hooks/useAuth";
 
 // const socket = io.connect("http://localhost:5000");
 
