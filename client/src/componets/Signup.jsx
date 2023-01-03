@@ -8,11 +8,12 @@ const Signup = () => {
   const [email, setemail] = useState();
   const [password, setpassword] = useState();
   const [confirmPassword, setconfirmPassword] = useState();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     console.log("send some data");
     e.preventDefault();
-    const navigate = useNavigate();
+
     axios
       .post("/api/signup", {
         email: email,
