@@ -1,6 +1,6 @@
 import React from "react";
 
-const SetProfile = ({ username, setUsername, socket }) => {
+const SetProfile = () => {
   return (
     <div className="flex justify-center items-center h-[100vh]">
       <div className="h-[600px] w-[800px] flex justify-center items-center bg-black rounded-2xl flex-col">

@@ -2,38 +2,44 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 import SocialIcons from "./SocialIcons";
 
 const Auth = () => {
   const [email, setemail] = useState();
   const [password, setpassword] = useState();
-  const [auth, setAuth] = useState(false);
+  // const [auth, setAuth] = useState(false);
+  const Auth = useAuth();
 
   const Navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     console.log("send some data");
     e.preventDefault();
-    axios
-      .post("/api/login", {
-        email: email,
-        password: password,
-      })
-      .then(function (response) {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("auth", response.data.login);
-        console.log(response.data.login);
-        console.log(response.data.login);
-        setAuth(response.data.login);
-        console.log(auth);
-        if (auth) {
-          Navigate("/setprofile", { replace: true });
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // await axios
+    //   .post("/api/login", {
+    //     email: email,
+    //     password: password,
+    //   })
+    //   .then(function (response) {
+    //     localStorage.setItem("token", response.data.token);
+    //     localStorage.setItem("auth", response.data.login);
+    //     if (response.data.login) {
+    //       setAuth(true);
+    //       console.log(auth);
+    //       if (auth) {
+    //         Navigate("/setprofile");
+    //       }
+    //     }
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+    const check = await Auth.login(email, password);
+    if (check) {
+      Navigate("/setprofile");
+    }
   };
   return (
     <div className="auth flex items-center">

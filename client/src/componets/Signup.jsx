@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import SocialIcons from "./SocialIcons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [email, setemail] = useState();
@@ -12,6 +12,7 @@ const Signup = () => {
   const handleSubmit = (e) => {
     console.log("send some data");
     e.preventDefault();
+    const navigate = useNavigate();
     axios
       .post("/api/signup", {
         email: email,
@@ -19,6 +20,7 @@ const Signup = () => {
         confirmPassword: confirmPassword,
       })
       .then(function (response) {
+        navigate("/login", { replace: true });
         console.log(response.data);
       })
       .catch(function (error) {
