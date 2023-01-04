@@ -14,12 +14,13 @@ const SetProfile = () => {
             type="text"
             placeholder="Name"
             className="w-[400px] h-[40px] mb-[20px] rounded-xl p-[10px]"
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
           <input
             type="text"
-            placeholder="User Name"
+            placeholder="@username"
             className="w-[400px] h-[40px] mb-[20px] rounded-xl p-[10px]"
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div>
