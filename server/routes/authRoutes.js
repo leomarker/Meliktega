@@ -19,7 +19,15 @@ const validatSignUp = [
   }),
 ];
 
+const validatLogin = [
+  bodyValidator("email").isEmail().withMessage("Please enter a valid email!"),
+  bodyValidator("password").custom((value) => {
+    if (value !== null || undefined) throw new Error("Invalid Password");
+    return true;
+  }),
+];
+
 router.post("/api/signup", validatSignUp, postSignup);
-router.post("/api/login", postLogin);
+router.post("/api/login", validatLogin, postLogin);
 
 module.exports = router;

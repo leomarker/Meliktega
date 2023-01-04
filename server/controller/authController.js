@@ -38,33 +38,41 @@ exports.postSignup = async (req, res, next) => {
 
 exports.postLogin = async (req, res, next) => {
   const { email, password } = req.body;
+  const validationErrors = validationResult(req);
+  console.log(validationErrors.isEmpty());
+  if (validationErrors.isEmpty()) {
+    const user = await User.findOne({ email: email });
+    console.log(user);
 
-  const user = await User.findOne({ email: email });
-  console.log(user);
-
-  if (user) {
-    console.log("nati");
-    bcrypt
-      .compare(password, user.password)
-      .then((match) => {
-        if (match === true) {
-          const payload = { email };
-          const secret = "thisisjustasecreat";
-          const token = jwt.sign(payload, secret, { expiresIn: "1h" });
-          console.log("jwt");
-          return res.send({ login: true, token: token });
-        } else {
-          console.log("cool");
-          return res.send({
-            login: false,
-            message: "invalid password or email combination",
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
+    if (user) {
+      console.log("nati");
+      bcrypt
+        .compare(password, user.password)
+        .then((match) => {
+          if (match === true) {
+            const payload = { email };
+            const secret = "thisisjustasecreat";
+            const token = jwt.sign(payload, secret, { expiresIn: "1h" });
+            console.log("jwt");
+            return res.send({ login: true, token: token });
+          } else {
+            console.log("cool");
+            return res.send({
+              login: false,
+              message: "invalid password or email combination",
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      return res.send({
+        login: false,
+        message: "no user found with this email",
       });
+    }
   } else {
-    return res.send({ login: false, message: "no user found with this email" });
+    return res.json({ msg: "Invalid email or password" });
   }
 };
