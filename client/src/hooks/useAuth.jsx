@@ -20,12 +20,7 @@ export const AuthProvider = ({ children }) => {
         console.log(response);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("auth", response.data.login);
-        console.log(response.data.login);
         access = response.data.login;
-        // if (auth) {
-        //   Navigate("/setprofile", { replace: true });
-        // }
-        console.log(response.data.login === true);
       })
       .catch(function (error) {
         console.log(error);
