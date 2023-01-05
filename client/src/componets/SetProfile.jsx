@@ -5,7 +5,23 @@ const SetProfile = () => {
   const [name, setName] = useState(null);
   const [userName, setUsername] = useState(null);
 
-  const handelSubmit = () => {};
+  const handelSubmit = (e) => {
+    console.log("send some profile data");
+    e.preventDefault();
+
+    axios
+      .post("/api/setProfile", {
+        name: name,
+        userName: userName,
+      })
+      .then(function (response) {
+        // navigate("/chats", { replace: true });
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="flex justify-center items-center h-[100vh]">
