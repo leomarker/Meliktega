@@ -21,10 +21,7 @@ const validatSignUp = [
 
 const validatLogin = [
   bodyValidator("email").isEmail().withMessage("Please enter a valid email!"),
-  bodyValidator("password").custom((value) => {
-    if (value !== null || undefined) throw new Error("Invalid Password");
-    return true;
-  }),
+  bodyValidator("password").notEmpty().withMessage("Invalid password"),
 ];
 
 router.post("/api/signup", validatSignUp, postSignup);
