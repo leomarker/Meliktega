@@ -1,10 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const SetProfile = () => {
   const [name, setName] = useState(null);
   const [userName, setUsername] = useState(null);
+  const navigate = useNavigate();
 
   const handelSubmit = (e) => {
     console.log("send some profile data");
@@ -16,7 +18,7 @@ const SetProfile = () => {
         userName: userName,
       })
       .then(function (response) {
-        // navigate("/chats", { replace: true });
+        navigate("/chats", { replace: true });
         console.log(response.data);
       })
       .catch(function (error) {

@@ -22,7 +22,7 @@ function App() {
 
           <Route path="/" element={<PrivateRoutes />}>
             <Route path="/setprofile" element={<SetProfile />} />
-            <Route path="/chat" element={<ChatUi />} />
+            <Route path="/chats" element={<ChatUi />} />
           </Route>
 
           <Route path="signup" element={<Signup />} />
