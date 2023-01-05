@@ -70,3 +70,7 @@ button:focus-visible {
 .bg-slatePlus {
   background-color: #193347;
 }
+.chat-btn {
+  background-color: #142838;
+  border-radius: 0px;
+}
