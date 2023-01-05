@@ -60,3 +60,9 @@ button:focus-visible {
 .chat-icon {
   color: #06b6d4;
 }
+.bg-slate {
+  background-color: #0f1e2a;
+}
+.bg-slateMinus {
+  background-color: #142838;
+}
