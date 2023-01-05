@@ -19,13 +19,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="login" element={<Auth />}></Route>
-
+          <Route path="signup" element={<Signup />} />
           <Route path="/" element={<PrivateRoutes />}>
             <Route path="/setprofile" element={<SetProfile />} />
             <Route path="/chats" element={<ChatUi />} />
           </Route>
-
-          <Route path="signup" element={<Signup />} />
         </Routes>
       </AuthProvider>
     </div>
