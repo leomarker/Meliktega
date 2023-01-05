@@ -107,12 +107,14 @@ const ChatUi = () => {
             <input
               type="text"
               placeholder="search"
-              className="w-[18rem] h-[2rem] p-[10px] bg-stone-700"
+              className="bg-slatePlus w-[18rem] h-[2rem] p-[10px] bg-stone-700"
             />
           </form>
         </div>
       </div>
-      <div></div>
+      <div className="bg-slate w-full h-full">
+        <div className="bg-slateMinus w-full h-[4rem] navbar"></div>
+      </div>
     </div>
   );
 };

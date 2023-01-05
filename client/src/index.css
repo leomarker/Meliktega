@@ -65,4 +65,8 @@ button:focus-visible {
 }
 .bg-slateMinus {
   background-color: #142838;
+  /* background-color: #1e3d55; */
+}
+.bg-slatePlus {
+  background-color: #193347;
 }
