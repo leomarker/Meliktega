@@ -7,6 +7,7 @@ const http = require("http");
 const cors = require("cors");
 
 const authRoutes = require("./routes/authRoutes");
+const profileroutes = require("./routes/profileRoutes");
 
 const app = express();
 
@@ -28,6 +29,7 @@ io.on("connection", (socket) => {
 });
 
 app.use(authRoutes);
+app.use(profileroutes);
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/melktega")
