@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import axios from "axios";
 
 const SetProfile = () => {
   const [name, setName] = useState(null);
@@ -46,13 +47,12 @@ const SetProfile = () => {
               className="w-[400px] h-[40px] mb-[20px] rounded-xl p-[10px]"
               onChange={(e) => setUsername(e.target.value)}
             />
+            <button className=" bg-gradient-to-r from-cyan-500 to-blue-500">
+              set profile
+            </button>
           </form>
         </div>
-        <div>
-          <button className=" bg-gradient-to-r from-cyan-500 to-blue-500">
-            set profile
-          </button>
-        </div>
+        <div></div>
       </div>
     </div>
   );
