@@ -114,6 +114,12 @@ const ChatUi = () => {
       </div>
       <div className="bg-slate w-full h-full">
         <div className="bg-slateMinus w-full h-[4rem] navbar"></div>
+        <div className="p-[10px]">
+          <form action="" className="flex">
+            <input type="text" className="w-full" />
+            <button>Send</button>
+          </form>
+        </div>
       </div>
     </div>
   );
