@@ -56,8 +56,19 @@ const ChatUi = () => {
     //   </div>
     // </div>
     <div className="flex h-[100vh]">
-      <div className="bg-stone-900 w-[4rem] h-full"></div>
-      <div className="bg-stone-800 w-[20rem] h-full"></div>
+      <div className="bg-stone-900 w-[4rem] h-full flex flex-col"></div>
+      <div className="bg-stone-800 w-[20rem] h-full">
+        <div className="p-[20px]">
+          {" "}
+          <form action="">
+            <input
+              type="text"
+              placeholder="search"
+              className="w-[18rem] h-[2rem] p-[10px] bg-stone-700"
+            />
+          </form>
+        </div>
+      </div>
       <div></div>
     </div>
   );
