@@ -1,7 +1,10 @@
-const User = require("../model/userProfile");
+const UserProfile = require("../model/userProfile");
 
-exports.setProfile = (req, res, next) => {
+exports.setProfile = async (req, res, next) => {
   const name = req.body.name;
   const userName = req.body.userName;
-  console.log(`ping:${userName}`);
+
+  const userProfile = await new UserProfile({ name: name, userName: userName });
+  await userProfile.save();
+  return res.status(201).json("profile updated");
 };

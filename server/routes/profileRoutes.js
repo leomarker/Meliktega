@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const setProfile = require("../controller/profile").setProfile;
+const setProfile = require("../controller/profileController").setProfile;
 
 router.post(
   "/api/setProfile",
