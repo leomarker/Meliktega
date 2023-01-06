@@ -3,18 +3,11 @@ const { body: bodyValidator } = require("express-validator");
 
 const setProfile = require("../controller/profileController").setProfile;
 
-const validatSignUp = [
+const validatSetProfile = [
   bodyValidator("name").notEmpty().withMessage("Enter a name"),
   bodyValidator("userName").notEmpty().withMessage("Enter a userName"),
 ];
 
-router.post(
-  "/api/setProfile",
-  (req, res, next) => {
-    console.log("nati");
-    next();
-  },
-  setProfile
-);
+router.post("/api/setProfile", validatSetProfile, setProfile);
 
 module.exports = router;
