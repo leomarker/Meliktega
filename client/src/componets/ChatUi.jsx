@@ -116,11 +116,20 @@ const ChatUi = () => {
         <div className="bg-slateMinus w-full h-[4rem] navbar"></div>
 
         <div className="py-[10px] w-full absolute bottom-[0]">
-          <div>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae
-            earum eius dignissimos nulla. Adipisci, magnam quisquam! Doloribus
-            suscipit nobis aliquid harum, fugiat voluptatem facere eos,
-            asperiores, laborum a eveniet repudiandae!
+          <div className="message">
+            <div className="message__outer">
+              <div className="message__inner">
+                <div className="message__avatar">A</div>
+                <div className="message__bubble mx-[20px] mb-[20px] p-[20px]">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Doloribus in necessitatibus dolor distinctio perspiciatis
+                  laborum provident eligendi nemo numquam minus libero corrupti
+                  alias, aut velit fuga tenetur amet vitae doloremque!
+                </div>
+              </div>
+
+              <div></div>
+            </div>
           </div>
           <div></div>
           <form action="" className="flex">
