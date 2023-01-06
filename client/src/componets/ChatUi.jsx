@@ -113,23 +113,16 @@ const ChatUi = () => {
         </div>
       </div>
       <div className="bg-slate w-full h-full  relative">
-        <div className="bg-slateMinus w-full h-[4rem] navbar">
-          <div class="incoming">
-            <div class="bubble">Hey, Father's Day is coming up..</div>
-            <div class="bubble">
-              What are you getting.. Oh, oops sorry dude.
-            </div>
-          </div>
-          <div class="outgoing">
-            <div class="bubble lower">Nah, it's cool.</div>
-            <div class="bubble">
-              Well you should get your Dad a cologne. Here smell it. Oh wait!
-              ...
-            </div>
-          </div>
-        </div>
+        <div className="bg-slateMinus w-full h-[4rem] navbar"></div>
 
-        <div className="py-[10px] w-full absolute top-[92%]">
+        <div className="py-[10px] w-full absolute bottom-[0]">
+          <div>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae
+            earum eius dignissimos nulla. Adipisci, magnam quisquam! Doloribus
+            suscipit nobis aliquid harum, fugiat voluptatem facere eos,
+            asperiores, laborum a eveniet repudiandae!
+          </div>
+          <div></div>
           <form action="" className="flex">
             <input
               type="text"
