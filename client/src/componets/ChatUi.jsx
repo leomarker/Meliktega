@@ -116,7 +116,11 @@ const ChatUi = () => {
         <div className="bg-slateMinus w-full h-[4rem] navbar"></div>
         <div className="py-[10px] w-full absolute top-[92%]">
           <form action="" className="flex">
-            <input type="text" className="w-full bg-slatePlus" />
+            <input
+              type="text"
+              placeholder="Write a message"
+              className="w-full bg-slatePlus p-[10px]"
+            />
             <button className="chat-btn">Send</button>
           </form>
         </div>
