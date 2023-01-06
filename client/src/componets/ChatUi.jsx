@@ -119,8 +119,10 @@ const ChatUi = () => {
           <div className="message">
             <div className="message__outer">
               <div className="message__inner">
-                <div className="message__avatar">A</div>
-                <div className="message__bubble mx-[20px] mb-[20px] p-[20px]">
+                <div className="message__avatar flex justify-center items-center">
+                  <p>A</p>
+                </div>
+                <div className="message__bubble ml-[20px] mr-[10px] mb-[20px] p-[20px]">
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                   Doloribus in necessitatibus dolor distinctio perspiciatis
                   laborum provident eligendi nemo numquam minus libero corrupti

@@ -87,5 +87,13 @@ button:focus-visible {
 .message__bubble {
   max-width: calc(100% - 55%);
   overflow-wrap: break-word;
+  background-color: #142838;
+  border-radius: 20px;
+}
+.message__avatar {
+  width: 3rem;
+  padding: 10px;
   background-color: #193347;
+  height: 30%;
+  border-radius: 50%;
 }
