@@ -8,7 +8,7 @@ const PrivateRoutes = () => {
   if (auth) {
     return <Outlet />;
   } else {
-    <Navigate to="/login" />;
+    return <Navigate to="/login" />;
   }
 };
 
