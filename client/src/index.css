@@ -94,6 +94,31 @@ button:focus-visible {
   width: 3rem;
   padding: 10px;
   background-color: #193347;
-  height: 30%;
+  height: 50px;
   border-radius: 50%;
+  margin-right: 10px;
+}
+
+.message__incoming {
+  display: flex;
+}
+
+.message__incoming__inner {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+.message__incoming__bubble {
+  max-width: calc(100% - 55%);
+  overflow-wrap: break-word;
+  background-color: #142838;
+  border-radius: 20px;
+}
+.message__incoming__avatar {
+  width: 3rem;
+  padding: 10px;
+  background-color: #193347;
+  height: 50px;
+  border-radius: 50%;
+  margin-left: 10px;
 }
