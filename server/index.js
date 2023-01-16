@@ -19,6 +19,8 @@ const server = http.createServer(app);
 app.use(express.json({ extended: false }));
 app.use(cors());
 
+//establishing io connection 
+
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",
