@@ -35,6 +35,9 @@ io.on("connection", (socket) => {
 app.use(authRoutes);
 app.use(profileroutes);
 
+
+//connection to mongodb
+
 mongoose
   .connect("mongodb://127.0.0.1:27017/melktega")
   .then(() => {
