@@ -1,10 +1,11 @@
 const bodyParser = require("body-parser");
 const express = require("express");
-const mongoConnect = require("./util/db").mongoConnect;
 const mongoose = require("mongoose");
 const { Server } = require("socket.io");
 const http = require("http");
 const cors = require("cors");
+const env = require('dotenv').config();
+
 
 //routes
 
@@ -39,10 +40,11 @@ app.use(profileroutes);
 //connection to mongodb
 
 mongoose
-  .connect("mongodb://localhost:27017")
+  .connect(process.env.MongoURI)
+  // .connect("mongodb://localhost:27017")
   .then(() => {
     server.listen(PORT, () => {
-      console.log("server runing at port 5000");
+      console.log("server runing at port 5000")
     });
   })
   .catch((err) => {
