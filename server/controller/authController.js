@@ -1,13 +1,13 @@
 const User = require("../model/authModel");
+const userProfile = require("../model/userProfile");
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
 const mongoose = require("mongoose");
+
  require('dotenv').config();
  
-
-
 
 exports.postSignup = async (req, res, next) => {
   const validationErrors = validationResult(req);
@@ -45,11 +45,13 @@ exports.postSignup = async (req, res, next) => {
 exports.postLogin = async (req, res, next) => {
   const { email, password } = req.body;
   const validationErrors = validationResult(req);
+  let setProfile = false;
 
   if (validationErrors.isEmpty()) {
     const  user = await User.findOne({ email: email });
-
+    const userID = user.id.valueOf();
     if (user) {
+    
     const match = await bcrypt.compare(password, user.password);
      if(match){
      const accessToken = jwt.sign({email: email}, process.env.Access_Token_Secret, { expiresIn: "1h" });
@@ -58,11 +60,17 @@ exports.postLogin = async (req, res, next) => {
      res.cookie('jwt',refreshToken,{ httpOnly: true, 
       sameSite: 'None', secure: true, 
       maxAge: 24 * 60 * 60 * 1000 });
+
+    const userName = await userProfile.find({userId : userID});
+    if(userName){
+          setProfile = true
+    }
       
-    const userData = {_id: user.id.valueOf(),email : user.email}
+    const userData = {_id: userID,email : user.email, userName: userName[0].userName}
       
+
      // save the refresh token to database 
-     return res.json({ login: true, accessToken: accessToken , userData });
+     return res.json({ login: true, accessToken: accessToken , userData  , setProfile });
     
   }
         
