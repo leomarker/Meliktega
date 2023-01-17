@@ -31,7 +31,7 @@ exports.postSignup = async (req, res, next) => {
       console.log("got a hit");
       res.status(201).json({ msg: "User created", redirect: true });
     } else {
-      res.json({ msg: "User exists" });
+      res.json({ msg: "Email already exist" , redirect: false });
     }
   } else {
     return res.json({ msg: validationErrors });
