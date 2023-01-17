@@ -6,10 +6,12 @@ exports.setProfile = async (req, res, next) => {
   if (validationError.isEmpty()) {
     const name = req.body.name;
     const userName = req.body.userName;
+    const userId = req.body.userId;
 
     const userProfile = await new UserProfile({
       name: name,
       userName: userName,
+      userId: userId
     });
     await userProfile.save();
     return res.status(201).json("profile updated");

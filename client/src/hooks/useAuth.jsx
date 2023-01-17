@@ -6,7 +6,7 @@ import axios from "axios";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  // const [user, setUser] = useLocalStorage("user", userData);
+  const [user, setUser] = useState(null);
   // const [accces, setAcess] = useState(false);
   let access;
   const login = async (email, password) => {
@@ -21,6 +21,8 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("auth", response.data.login);
         access = response.data.login;
+        console.log(response);
+        setUser(response.data.userData);
       })
       .catch(function (error) {
         console.log(error);
@@ -44,7 +46,7 @@ export const AuthProvider = ({ children }) => {
   // );
 
   return (
-    <AuthContext.Provider value={{ login }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ login,user }}>{children}</AuthContext.Provider>
   );
 };
 

@@ -3,7 +3,9 @@ const User = require("../model/authModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
+const mongoose = require("mongoose");
  require('dotenv').config();
+ 
 
 
 
@@ -45,7 +47,7 @@ exports.postLogin = async (req, res, next) => {
   const validationErrors = validationResult(req);
 
   if (validationErrors.isEmpty()) {
-    const user = await User.findOne({ email: email });
+    const  user = await User.findOne({ email: email });
 
     if (user) {
     const match = await bcrypt.compare(password, user.password);
@@ -56,10 +58,11 @@ exports.postLogin = async (req, res, next) => {
      res.cookie('jwt',refreshToken,{ httpOnly: true, 
       sameSite: 'None', secure: true, 
       maxAge: 24 * 60 * 60 * 1000 });
-    
-
+      
+    const userData = {_id: user.id.valueOf(),email : user.email}
+      
      // save the refresh token to database 
-     return res.json({ login: true, accessToken: accessToken });
+     return res.json({ login: true, accessToken: accessToken , userData });
     
   }
         

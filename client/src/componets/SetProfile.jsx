@@ -2,22 +2,28 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 const SetProfile = () => {
   const [name, setName] = useState(null);
   const [userName, setUsername] = useState(null);
   const navigate = useNavigate();
+  const auth = useAuth();
 
   const handelSubmit = (e) => {
     console.log("send some profile data");
     e.preventDefault();
+    console.log(auth.user._id)
+    const user = auth.user
 
     axios
       .post("/api/setProfile", {
         name: name,
         userName: userName,
+        userId: auth.user._id
       })
       .then(function (response) {
+        auth.user = {user, userName}
         navigate("/chats", { replace: true });
         console.log(response.data);
       })

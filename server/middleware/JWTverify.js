@@ -1,12 +1,19 @@
 const jwt = require("jsonwebtoken");
 
-
-const verifyToken = async(req,res,next) =>{
-    const authHeader = req.headers.authorization;
-
-    if(!authHeader?.startsWith('Bearer ')){
-        return res.status(401).json({msg:"Unauthorized"})
+exports.verifytoken = (req, res, next) => {
+  try {
+    let token = req.header("Authorization");
+    const secret = "this is jwt";
+    if (!token) {
+      return res.redirect("/api/login");
     }
-
-    
-}
+    if (token.startsWith("Bearer ")) {
+      token = token.slice(7, token.length).trimLeft();
+    }
+    const verify = jwt.verify(token, secret);
+    req.use = verify;
+    next();
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
+  }
+};

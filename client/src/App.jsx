@@ -10,7 +10,7 @@ import ChatUi from "./componets/ChatUi";
 import PrivateRoutes from "./componets/PrivateRoutes";
 import { AuthProvider } from "./hooks/useAuth";
 
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect("http://localhost:5000",{autoConnect: false });
 
 function App() {
   return (

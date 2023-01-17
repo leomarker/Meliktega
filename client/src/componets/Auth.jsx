@@ -9,7 +9,6 @@ import SocialIcons from "./SocialIcons";
 const Auth = () => {
   const [email, setemail] = useState();
   const [password, setpassword] = useState();
-  // const [auth, setAuth] = useState(false);
   const auth = useAuth();
 
   const Navigate = useNavigate();
@@ -17,27 +16,8 @@ const Auth = () => {
   const handleSubmit = async (e) => {
     console.log("send some data");
     e.preventDefault();
-    // await axios
-    //   .post("/api/login", {
-    //     email: email,
-    //     password: password,
-    //   })
-    //   .then(function (response) {
-    //     localStorage.setItem("token", response.data.token);
-    //     localStorage.setItem("auth", response.data.login);
-    //     if (response.data.login) {
-    //       setAuth(true);
-    //       console.log(auth);
-    //       if (auth) {
-    //         Navigate("/setprofile");
-    //       }
-    //     }
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+
     const check = await auth.login(email, password);
-    console.log(check);
     if (check) {
       Navigate("/setprofile");
     }
