@@ -39,7 +39,7 @@ app.use(profileroutes);
 //connection to mongodb
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/melktega")
+  .connect("mongodb://localhost:27017")
   .then(() => {
     server.listen(PORT, () => {
       console.log("server runing at port 5000");

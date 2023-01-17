@@ -11,8 +11,7 @@ const validatSignUp = [
     minLowercase: 1,
     minUppercase: 1,
     minNumbers: 1,
-    minSymbols: 1,
-  }),
+  }).withMessage("password error"),
   bodyValidator("confirmPassword").custom((value, { req }) => {
     if (value !== req.body.password) throw new Error("Password Mismatch !");
     return true;
@@ -24,7 +23,7 @@ const validatLogin = [
   bodyValidator("password").notEmpty().withMessage("Invalid password"),
 ];
 
-router.post("/api/signup", validatSignUp, postSignup);
+router.post("/api/signup", postSignup);
 router.post("/api/login", validatLogin, postLogin);
 
 module.exports = router;
