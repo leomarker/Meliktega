@@ -52,7 +52,14 @@ exports.postLogin = async (req, res, next) => {
      if(match){
      const accessToken = jwt.sign({email: email}, process.env.Access_Token_Secret, { expiresIn: "1h" });
      const refreshToken = jwt.sign({email:email},process.env.Refresh_Token_Secret,{expiresIn : "24h"})
-     return res.send({ login: true, token: token });
+
+     res.cookie('jwt',refreshToken,{ httpOnly: true, 
+      sameSite: 'None', secure: true, 
+      maxAge: 24 * 60 * 60 * 1000 });
+    
+
+     // save the refresh token to database 
+     return res.json({ login: true, accessToken: accessToken });
     
   }
         
