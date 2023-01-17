@@ -3,6 +3,7 @@ const User = require("../model/authModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
+ require('dotenv').config();
 
 
 
@@ -31,6 +32,7 @@ exports.postSignup = async (req, res, next) => {
       console.log("got a hit");
       res.status(201).json({ msg: "User created", redirect: true });
     } else {
+      
       res.json({ msg: "Email already exist" , redirect: false });
     }
   } else {
@@ -41,33 +43,19 @@ exports.postSignup = async (req, res, next) => {
 exports.postLogin = async (req, res, next) => {
   const { email, password } = req.body;
   const validationErrors = validationResult(req);
-  console.log(validationErrors.isEmpty());
+
   if (validationErrors.isEmpty()) {
     const user = await User.findOne({ email: email });
-    console.log(user);
 
     if (user) {
-      console.log("nati");
-      bcrypt
-        .compare(password, user.password)
-        .then((match) => {
-          if (match === true) {
-            const payload = { email };
-            const secret = "thisisjustasecreat";
-            const token = jwt.sign(payload, secret, { expiresIn: "1h" });
-            console.log("jwt");
-            return res.send({ login: true, token: token });
-          } else {
-            console.log("cool");
-            return res.send({
-              login: false,
-              message: "invalid password or email combination",
-            });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    const match = await bcrypt.compare(password, user.password);
+     if(match){
+     const accessToken = jwt.sign({email: email}, process.env.Access_Token_Secret, { expiresIn: "1h" });
+     const refreshToken = jwt.sign({email:email},process.env.Refresh_Token_Secret,{expiresIn : "24h"})
+     return res.send({ login: true, token: token });
+    
+  }
+        
     } else {
       return res.send({
         login: false,
