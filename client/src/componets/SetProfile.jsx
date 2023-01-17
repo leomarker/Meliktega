@@ -23,6 +23,7 @@ const SetProfile = () => {
         userId: auth.user._id
       })
       .then(function (response) {
+        console.log(response);
         auth.user = {user, userName}
         navigate("/chats", { replace: true });
         console.log(response.data);

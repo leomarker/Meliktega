@@ -8,6 +8,12 @@ exports.setProfile = async (req, res, next) => {
     const userName = req.body.userName;
     const userId = req.body.userId;
 
+    const checkUserName = UserProfile.find({userId: userId,userName: userName});
+    if(checkUserName){
+      console.log("User name already taken ")
+      return res.status(400).json({msg: "User name already taken "})
+    }
+
     const userProfile = await new UserProfile({
       name: name,
       userName: userName,

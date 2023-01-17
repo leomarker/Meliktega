@@ -7,7 +7,6 @@ const auth = useAuth();
 const user = auth.user
 console.log(user)
   return (
-
     <div className="flex h-[100vh]">
       <div className="bg-slate w-[4rem] h-full flex flex-col">
         <div className="h-full flex flex-col mt-[20px] mx-[10px]">
