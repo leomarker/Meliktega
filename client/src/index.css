@@ -7,7 +7,7 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
-
+  outline: none;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   /* color: #1a1a1a; */

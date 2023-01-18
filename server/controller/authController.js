@@ -45,7 +45,8 @@ exports.postSignup = async (req, res, next) => {
 exports.postLogin = async (req, res, next) => {
   const { email, password } = req.body;
   const validationErrors = validationResult(req);
-  let setProfile = false;
+
+  let setProfile = true;
 
   if (validationErrors.isEmpty()) {
     const  user = await User.findOne({ email: email });
@@ -63,7 +64,7 @@ exports.postLogin = async (req, res, next) => {
 
     const userName = await userProfile.find({userId : userID});
     if(userName){
-          setProfile = true
+          setProfile = false
     }
       
     const userData = {_id: userID,email : user.email, userName: userName[0].userName}
