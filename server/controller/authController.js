@@ -69,7 +69,6 @@ exports.postLogin = async (req, res, next) => {
       
     const userData = {_id: userID,email : user.email, userName: userName[0].userName}
       
-
      // save the refresh token to database 
      return res.json({ login: true, accessToken: accessToken , userData  , setProfile });
     

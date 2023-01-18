@@ -18,7 +18,7 @@ const Auth = () => {
     e.preventDefault();
 
     const check = await auth.login(email, password);
-    if (check && auth.setProfile) {
+    if (check) {
       Navigate("/setprofile");
     } else{
       Navigate("/chats")

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { createContext, useContext, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [auth, setAuth] = useState(false);
   let setProfile = false;
   let access;
   const login = async (email, password) => {
@@ -17,14 +17,14 @@ export const AuthProvider = ({ children }) => {
       })
       .then(function (response) {
         access = response.data.login;
-        console.log(response);
         setUser(response.data.userData);
         setProfile = response.data.setProfile
+        setAuth(!auth)
       })
       .catch(function (error) {
         console.log(error);
       });
-    console.log(access);
+      console.log(access)
     return access;
   };
 
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
   // );
 
   return (
-    <AuthContext.Provider value={{ login,user, setProfile }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ login,user, setProfile,auth }}>{children}</AuthContext.Provider>
   );
 };
 
