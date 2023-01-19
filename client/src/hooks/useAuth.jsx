@@ -19,7 +19,8 @@ export const AuthProvider = ({ children }) => {
         access = response.data.login;
         setUser(response.data.userData);
         setProfile = response.data.setProfile
-        setAuth(!auth)
+        setAuth(response.data.login)
+        localStorage.setItem("token",)
       })
       .catch(function (error) {
         console.log(error);
@@ -43,7 +44,7 @@ export const AuthProvider = ({ children }) => {
   // );
 
   return (
-    <AuthContext.Provider value={{ login,user, setProfile,auth }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ login,user, setProfile,auth , access }}>{children}</AuthContext.Provider>
   );
 };
 

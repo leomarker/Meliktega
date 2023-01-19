@@ -4,7 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 
 const PrivateRoutes = () => {
   const data = useAuth();
-
+  console.log(data)
   if (data.auth) {
     return <Outlet />;
   } else {

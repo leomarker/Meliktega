@@ -50,9 +50,9 @@ exports.postLogin = async (req, res, next) => {
 
   if (validationErrors.isEmpty()) {
     const  user = await User.findOne({ email: email });
-    const userID = user.id.valueOf();
-    if (user) {
     
+    if (user) {
+      const userID = user.id.valueOf();
     const match = await bcrypt.compare(password, user.password);
      if(match){
      const accessToken = jwt.sign({email: email}, process.env.Access_Token_Secret, { expiresIn: "1h" });
@@ -72,6 +72,8 @@ exports.postLogin = async (req, res, next) => {
      // save the refresh token to database 
      return res.json({ login: true, accessToken: accessToken , userData  , setProfile });
     
+  } else {
+    return res.json({ msg: "Invalid email or password" });
   }
         
     } else {
