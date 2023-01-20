@@ -16,11 +16,12 @@ export const AuthProvider = ({ children }) => {
         password: password,
       })
       .then(function (response) {
+        console.log(response);
         access = response.data.login;
         setUser(response.data.userData);
         setProfile = response.data.setProfile
         setAuth(response.data.login)
-        localStorage.setItem("token",)
+        localStorage.setItem("token",response.data.accessToken);
       })
       .catch(function (error) {
         console.log(error);

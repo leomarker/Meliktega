@@ -12,4 +12,4 @@ const userProfileSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = Mongoose.model("UserProfile", userProfileSchema);
+module.exports = Mongoose.model("UserProfile", userProfileSchema ,"UserProfile" );

@@ -1,5 +1,5 @@
 const User = require("../model/authModel");
-const userProfile = require("../model/userProfile");
+const UserProfile = require("../model/userProfile");
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -48,11 +48,11 @@ exports.postLogin = async (req, res, next) => {
 
   let setProfile = true;
 
-  if (validationErrors.isEmpty()) {
+  
     const  user = await User.findOne({ email: email });
-    
+    console.log(user)
     if (user) {
-      const userID = user.id.valueOf();
+    const userID = user.id.valueOf();
     const match = await bcrypt.compare(password, user.password);
      if(match){
      const accessToken = jwt.sign({email: email}, process.env.Access_Token_Secret, { expiresIn: "1h" });
@@ -62,12 +62,16 @@ exports.postLogin = async (req, res, next) => {
       sameSite: 'None', secure: true, 
       maxAge: 24 * 60 * 60 * 1000 });
 
-    const userName = await userProfile.find({userId : userID});
-    if(userName){
-          setProfile = false
-    }
+    // let userName = await UserProfile.find({userId : userID});
+    // console.log(userName)
+    // let hooo = [];
+    // console.log(Boolean(hooo));
+    // if(userName){
+    //      setProfile = false;
+    //      userName = userName[0].userName
+    // }
       
-    const userData = {_id: userID,email : user.email, userName: userName[0].userName}
+    const userData = {_id: userID,email : user.email}
       
      // save the refresh token to database 
      return res.json({ login: true, accessToken: accessToken , userData  , setProfile });
@@ -82,7 +86,4 @@ exports.postLogin = async (req, res, next) => {
         message: "no user found with this email",
       });
     }
-  } else {
-    return res.json({ msg: "Invalid email or password" });
-  }
 };

@@ -8,6 +8,6 @@ const validatSetProfile = [
   bodyValidator("userName").notEmpty().withMessage("Enter a userName"),
 ];
 
-router.post("/api/setProfile", validatSetProfile, setProfile);
+router.post("/api/setProfile", setProfile);
 
 module.exports = router;
