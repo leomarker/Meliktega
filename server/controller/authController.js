@@ -6,8 +6,7 @@ const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
 const mongoose = require("mongoose");
 
- require('dotenv').config();
- 
+require("dotenv").config();
 
 exports.postSignup = async (req, res, next) => {
   const validationErrors = validationResult(req);
@@ -34,8 +33,7 @@ exports.postSignup = async (req, res, next) => {
       console.log("got a hit");
       res.status(201).json({ msg: "User created", redirect: true });
     } else {
-      
-      res.json({ msg: "Email already exist" , redirect: false });
+      res.json({ msg: "Email already exist", redirect: false });
     }
   } else {
     return res.json({ msg: validationErrors });
@@ -48,42 +46,55 @@ exports.postLogin = async (req, res, next) => {
 
   let setProfile = true;
 
-  
-    const  user = await User.findOne({ email: email });
-    console.log(user)
-    if (user) {
+  const user = await User.findOne({ email: email });
+  console.log(user);
+  if (user) {
     const userID = user.id.valueOf();
     const match = await bcrypt.compare(password, user.password);
-     if(match){
-     const accessToken = jwt.sign({email: email}, process.env.Access_Token_Secret, { expiresIn: "1h" });
-     const refreshToken = jwt.sign({email:email},process.env.Refresh_Token_Secret,{expiresIn : "24h"})
+    if (match) {
+      const accessToken = jwt.sign(
+        { email: email },
+        process.env.Access_Token_Secret,
+        { expiresIn: "1h" }
+      );
+      const refreshToken = jwt.sign(
+        { email: email },
+        process.env.Refresh_Token_Secret,
+        { expiresIn: "24h" }
+      );
 
-     res.cookie('jwt',refreshToken,{ httpOnly: true, 
-      sameSite: 'None', secure: true, 
-      maxAge: 24 * 60 * 60 * 1000 });
-
-    // let userName = await UserProfile.find({userId : userID});
-    // console.log(userName)
-    // let hooo = [];
-    // console.log(Boolean(hooo));
-    // if(userName){
-    //      setProfile = false;
-    //      userName = userName[0].userName
-    // }
-      
-    const userData = {_id: userID,email : user.email}
-      
-     // save the refresh token to database 
-     return res.json({ login: true, accessToken: accessToken , userData  , setProfile });
-    
-  } else {
-    return res.json({ msg: "Invalid email or password" });
-  }
-        
-    } else {
-      return res.send({
-        login: false,
-        message: "no user found with this email",
+      res.cookie("jwt", refreshToken, {
+        httpOnly: true,
+        sameSite: "None",
+        secure: true,
+        maxAge: 24 * 60 * 60 * 1000,
       });
+
+      // let userName = await UserProfile.find({userId : userID});
+      // console.log(userName)
+      // let hooo = [];
+      // console.log(Boolean(hooo));
+      // if(userName){
+      //      setProfile = false;
+      //      userName = userName[0].userName
+      // }
+
+      const userData = { _id: userID, email: user.email };
+
+      // save the refresh token to database
+      return res.json({
+        login: true,
+        accessToken: accessToken,
+        userData,
+        setProfile,
+      });
+    } else {
+      return res.json({ msg: "Invalid email or password" });
     }
+  } else {
+    return res.send({
+      login: false,
+      message: "no user found with this email",
+    });
+  }
 };
