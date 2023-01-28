@@ -4,8 +4,7 @@ const mongoose = require("mongoose");
 const { Server } = require("socket.io");
 const http = require("http");
 const cors = require("cors");
-const env = require('dotenv').config();
-
+const env = require("dotenv").config();
 
 //routes
 
@@ -20,7 +19,7 @@ const server = http.createServer(app);
 app.use(express.json({ extended: false }));
 app.use(cors());
 
-//establishing io connection 
+//establishing io connection
 
 const io = new Server(server, {
   cors: {
@@ -36,15 +35,14 @@ io.on("connection", (socket) => {
 app.use(authRoutes);
 app.use(profileroutes);
 
-
 //connection to mongodb
 
 mongoose
-  .connect(process.env.MongoURI)
-  // .connect("mongodb://localhost:27017")
+  // .connect(process.env.MongoURI)
+  .connect("mongodb://127.0.0.1:27017")
   .then(() => {
     server.listen(PORT, () => {
-      console.log("server runing at port 5000")
+      console.log("server runing at port 5000");
     });
   })
   .catch((err) => {
