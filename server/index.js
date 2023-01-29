@@ -39,10 +39,10 @@ app.use(profileroutes);
 
 mongoose
   // .connect(process.env.MongoURI)
-  .connect("mongodb://127.0.0.1:27017")
+  .connect("mongodb://127.0.0.1:27017/meliktega")
   .then(() => {
     server.listen(PORT, () => {
-      console.log("server runing at port 5000");
+      console.log("server running at port 5000");
     });
   })
   .catch((err) => {
