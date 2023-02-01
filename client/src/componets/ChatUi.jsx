@@ -8,8 +8,9 @@ import ChatFooter from "./ChatFooter";
 const ChatUi = ({ socket }) => {
   const auth = useAuth();
   const user = auth.user;
-  const { sentMessages, setSentMessages } = useState([]);
-  const { messageResponse, setMessageResponse } = useState([]);
+  const [sentMessages, setSentMessages] = useState([]);
+  const [messageResponse, setMessageResponse] = useState([]);
+  console.log(sentMessages + "nati");
 
   return (
     <div className="flex h-[100vh]">
@@ -18,8 +19,12 @@ const ChatUi = ({ socket }) => {
         <div className="bg-slateMinus w-full h-[4rem] navbar"></div>
 
         <div className="py-[10px] w-full absolute bottom-[0]">
-          <ChatBody />
-          <ChatFooter socket={socket} setSentMessages={setSentMessages} />
+          <ChatBody messageResponse={messageResponse} />
+          <ChatFooter
+            socket={socket}
+            setSentMessages={setSentMessages}
+            sentMessages={sentMessages}
+          />
         </div>
       </div>
     </div>
