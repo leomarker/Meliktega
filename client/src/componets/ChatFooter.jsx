@@ -9,7 +9,7 @@ const ChatFooter = ({ socket, setSentMessages, sentMessages }) => {
       text: message,
       socketId: socket.id,
     });
-    setSentMessages([sentMessages, message]);
+    setSentMessages([...sentMessages, message]);
     setMessage("");
   };
   return (

@@ -10,7 +10,7 @@ const ChatUi = ({ socket }) => {
   const user = auth.user;
   const [sentMessages, setSentMessages] = useState([]);
   const [messageResponse, setMessageResponse] = useState([]);
-  console.log(sentMessages + "nati");
+  console.log(sentMessages);
 
   return (
     <div className="flex h-[100vh]">
