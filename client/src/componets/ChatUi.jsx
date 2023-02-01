@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../hooks/useAuth";
 import ChatBar from "./ChatBar";
 import ChatBody from "./ChatBody";
@@ -12,6 +12,12 @@ const ChatUi = ({ socket }) => {
   const [messageResponse, setMessageResponse] = useState([]);
   console.log(sentMessages);
 
+  useEffect(() => {
+    socket.on("messageResponse", (data) =>
+      setMessageResponse([...messageResponse, data])
+    );
+  }, []);
+  console.log(messageResponse);
   return (
     <div className="flex h-[100vh]">
       <ChatBar />
