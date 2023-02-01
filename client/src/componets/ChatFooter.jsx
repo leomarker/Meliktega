@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const ChatFooter = ({ socket }) => {
+const ChatFooter = ({ socket, setSentMessages }) => {
   const [message, setMessage] = useState("");
   const handleSend = (e) => {
     e.preventDefault();
@@ -9,6 +9,7 @@ const ChatFooter = ({ socket }) => {
       text: message,
       socketId: socket.id,
     });
+    setSentMessages(message);
     setMessage("");
   };
   return (

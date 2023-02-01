@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import ChatBar from "./ChatBar";
 import ChatBody from "./ChatBody";
@@ -7,7 +8,9 @@ import ChatFooter from "./ChatFooter";
 const ChatUi = ({ socket }) => {
   const auth = useAuth();
   const user = auth.user;
-  console.log(user);
+  const { sentMessages, setSentMessages } = useState([]);
+  const { messageResponse, setMessageResponse } = useState([]);
+
   return (
     <div className="flex h-[100vh]">
       <ChatBar />
@@ -16,7 +19,7 @@ const ChatUi = ({ socket }) => {
 
         <div className="py-[10px] w-full absolute bottom-[0]">
           <ChatBody />
-          <ChatFooter socket={socket} />
+          <ChatFooter socket={socket} setSentMessages={setSentMessages} />
         </div>
       </div>
     </div>
