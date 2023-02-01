@@ -11,4 +11,4 @@ const messages = new Schema(
   { timestamps: true }
 );
 
-module.exports = Mongoose.model("UserProfile", userSchema);
+module.exports = Mongoose.model("messages", messages);

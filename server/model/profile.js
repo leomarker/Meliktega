@@ -2,7 +2,7 @@ const Mongoose = require("mongoose");
 
 const { Schema } = Mongoose;
 
-const userProfileSchema = new Schema(
+const profileSchema = new Schema(
   {
     name: String,
     userName: String,
@@ -12,4 +12,4 @@ const userProfileSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = Mongoose.model("UserProfile", userProfileSchema ,"UserProfile" );
+module.exports = Mongoose.model("Profile", profileSchema);

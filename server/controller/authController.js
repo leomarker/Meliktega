@@ -1,5 +1,5 @@
 const User = require("../model/authModel");
-const UserProfile = require("../model/userProfile");
+const Profile = require("../model/profile");
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -70,7 +70,7 @@ exports.postLogin = async (req, res, next) => {
         maxAge: 24 * 60 * 60 * 1000,
       });
 
-      // let userName = await UserProfile.find({userId : userID});
+      // let userName = await Profile.find({userId : userID});
       // console.log(userName)
       // let hooo = [];
       // console.log(Boolean(hooo));
