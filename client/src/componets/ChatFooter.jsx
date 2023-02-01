@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
 
-const ChatFooter = () => {
+const ChatFooter = ({ socket }) => {
   const [message, setMessage] = useState("");
   const handelsubmit = (e) => {
     e.preventDefault();
+    socket.emit;
   };
   return (
     <div>

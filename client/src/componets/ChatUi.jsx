@@ -4,7 +4,7 @@ import ChatBar from "./ChatBar";
 import ChatBody from "./ChatBody";
 import ChatFooter from "./ChatFooter";
 
-const ChatUi = () => {
+const ChatUi = ({ socket }) => {
   const auth = useAuth();
   const user = auth.user;
   console.log(user);
@@ -16,7 +16,7 @@ const ChatUi = () => {
 
         <div className="py-[10px] w-full absolute bottom-[0]">
           <ChatBody />
-          <ChatFooter />
+          <ChatFooter socket={socket} />
         </div>
       </div>
     </div>
