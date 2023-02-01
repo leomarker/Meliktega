@@ -3,21 +3,26 @@ import { useState } from "react";
 
 const ChatFooter = ({ socket }) => {
   const [message, setMessage] = useState("");
-  const handelsubmit = (e) => {
+  const handleSend = (e) => {
     e.preventDefault();
+    console.log("asdhjfgsa");
+    console.log(message);
+
     socket.emit("message", {
-      text: message.trim(),
-      socketId: socket.id,
+      text: message,
     });
   };
   return (
     <div>
       {" "}
-      <form action="" className="flex">
+      <form action="" className="flex" onSubmit={handleSend}>
         <input
           type="text"
           placeholder="Write a message"
           className="w-full bg-slatePlus p-[10px]"
+          onChange={(e) => {
+            setMessage(e.target.value);
+          }}
         />
         <button className="chat-btn">Send</button>
       </form>

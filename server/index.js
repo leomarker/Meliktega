@@ -30,6 +30,10 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
   console.log(`a user connected with ${socket.id}`);
+
+  io.on("message", (data) => {
+    console.log(data);
+  });
 });
 
 app.use(authRoutes);
