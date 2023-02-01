@@ -5,12 +5,11 @@ const ChatFooter = ({ socket }) => {
   const [message, setMessage] = useState("");
   const handleSend = (e) => {
     e.preventDefault();
-    console.log("asdhjfgsa");
-    console.log(socket);
-    console.log(message);
     socket.emit("message", {
       text: message,
+      socketId: socket.id,
     });
+    setMessage("");
   };
   return (
     <div>
@@ -23,6 +22,7 @@ const ChatFooter = ({ socket }) => {
           onChange={(e) => {
             setMessage(e.target.value);
           }}
+          value={message}
         />
         <button className="chat-btn">Send</button>
       </form>
