@@ -5,7 +5,10 @@ const ChatFooter = ({ socket }) => {
   const [message, setMessage] = useState("");
   const handelsubmit = (e) => {
     e.preventDefault();
-    socket.emit;
+    socket.emit("message", {
+      text: message.trim(),
+      socketId: socket.id,
+    });
   };
   return (
     <div>
