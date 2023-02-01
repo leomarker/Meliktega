@@ -6,8 +6,8 @@ const ChatFooter = ({ socket }) => {
   const handleSend = (e) => {
     e.preventDefault();
     console.log("asdhjfgsa");
+    console.log(socket);
     console.log(message);
-
     socket.emit("message", {
       text: message,
     });
