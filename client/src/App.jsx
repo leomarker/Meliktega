@@ -10,7 +10,7 @@ import ChatUi from "./componets/ChatUi";
 import PrivateRoutes from "./componets/PrivateRoutes";
 import { AuthProvider } from "./hooks/useAuth";
 
-const socket = io.connect("http://localhost:5000",{autoConnect: false });
+const socket = io.connect("http://localhost:5000", { autoConnect: false });
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
           <Route path="signup" element={<Signup />} />
           <Route path="/" element={<PrivateRoutes />}>
             <Route path="/setprofile" element={<SetProfile />} />
-            <Route path="/chats" element={<ChatUi />} />
+            <Route path="/chats" element={<ChatUi socket={socket} />} />
           </Route>
         </Routes>
       </AuthProvider>

@@ -1,6 +1,11 @@
 import React from "react";
+import { useState } from "react";
 
 const ChatFooter = () => {
+  const [message, setMessage] = useState("");
+  const handelsubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <div>
       {" "}
