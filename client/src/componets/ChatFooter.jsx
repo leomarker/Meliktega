@@ -5,7 +5,7 @@ import { useAuth } from "../hooks/useAuth";
 const ChatFooter = ({ socket, setSentMessages, sentMessages }) => {
   const [message, setMessage] = useState("");
   const auth = useAuth();
-  const user = auth.user;
+  const user = JSON.parse(localStorage.getItem("user"));
   const handleSend = (e) => {
     e.preventDefault();
     socket.emit("message", {
