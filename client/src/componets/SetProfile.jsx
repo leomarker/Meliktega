@@ -13,18 +13,18 @@ const SetProfile = () => {
   const handelSubmit = (e) => {
     console.log("send some profile data");
     e.preventDefault();
-    console.log(auth.user._id)
-    const user = auth.user
+    console.log(auth.user._id);
+    const user = auth.user;
 
     axios
       .post("/api/setProfile", {
         name: name,
         userName: userName,
-        userId: auth.user._id
+        userId: auth.user._id,
       })
       .then(function (response) {
         console.log(response);
-        auth.user = {user, userName}
+        localStorage.setItem("user", JSON.stringify({ user, userName }));
         navigate("/chats", { replace: true });
         console.log(response.data);
       })

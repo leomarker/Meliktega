@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
         setProfile = response.data.setProfile;
         setAuth(response.data.login);
         localStorage.setItem("token", response.data.accessToken);
-        localStorage.setItem("user", response.data.userData);
+        localStorage.setItem("user", JSON.stringify(response.data.userData));
       })
       .catch(function (error) {
         console.log(error);
