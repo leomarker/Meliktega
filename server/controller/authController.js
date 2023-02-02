@@ -70,14 +70,12 @@ exports.postLogin = async (req, res, next) => {
         maxAge: 24 * 60 * 60 * 1000,
       });
 
-      // let userName = await Profile.find({userId : userID});
-      // console.log(userName)
-      // let hooo = [];
-      // console.log(Boolean(hooo));
-      // if(userName){
-      //      setProfile = false;
-      //      userName = userName[0].userName
-      // }
+      let userName = await Profile.find({ userId: userID });
+      console.log(userName);
+      if (userName) {
+        setProfile = false;
+        userName = userName[0].userName;
+      }
 
       const userData = { _id: userID, email: user.email };
 

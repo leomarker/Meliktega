@@ -16,22 +16,25 @@ export const AuthProvider = ({ children }) => {
         password: password,
       })
       .then(function (response) {
-        console.log(response);
+        console.log(response, "this is sadklfjla");
         access = response.data.login;
         setUser(response.data.userData);
-        setProfile = response.data.setProfile
-        setAuth(response.data.login)
-        localStorage.setItem("token",response.data.accessToken);
+        setProfile = response.data.setProfile;
+        setAuth(response.data.login);
+        localStorage.setItem("token", response.data.accessToken);
+        localStorage.setItem("user", response.data.userData);
       })
       .catch(function (error) {
         console.log(error);
       });
-      console.log(access)
+    console.log(access);
     return access;
   };
 
   return (
-    <AuthContext.Provider value={{ login,user, setProfile,auth , access }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ login, user, setProfile, auth, access }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 

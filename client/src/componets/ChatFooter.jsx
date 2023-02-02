@@ -1,13 +1,17 @@
 import React from "react";
 import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 
 const ChatFooter = ({ socket, setSentMessages, sentMessages }) => {
   const [message, setMessage] = useState("");
+  const auth = useAuth();
+  const user = auth.user;
   const handleSend = (e) => {
     e.preventDefault();
     socket.emit("message", {
       text: message,
       socketId: socket.id,
+      username: user.userName,
     });
     setSentMessages([...sentMessages, message]);
     setMessage("");

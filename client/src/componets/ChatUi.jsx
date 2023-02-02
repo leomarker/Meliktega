@@ -10,13 +10,14 @@ const ChatUi = ({ socket }) => {
   const user = auth.user;
   const [sentMessages, setSentMessages] = useState([]);
   const [messageResponse, setMessageResponse] = useState([]);
+  console.log(user);
   console.log(sentMessages);
 
   useEffect(() => {
     socket.on("messageResponse", (data) =>
       setMessageResponse([...messageResponse, data])
     );
-  }, []);
+  }, [socket, messageResponse]);
   console.log(messageResponse);
   return (
     <div className="flex h-[100vh]">
