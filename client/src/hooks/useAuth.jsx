@@ -5,10 +5,13 @@ import axios from "axios";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState([]);
   const [auth, setAuth] = useState(false);
   let setProfile = false;
-  let access;
+  let access = {
+    access: false,
+    setProfile: false,
+  };
   const login = async (email, password) => {
     await axios
       .post("/api/login", {
@@ -16,18 +19,20 @@ export const AuthProvider = ({ children }) => {
         password: password,
       })
       .then(function (response) {
-        console.log(response, "this is sadklfjla");
-        access = response.data.login;
+        console.log(response);
+        access.access = response.data.login;
+        access.setProfile = response.data.setProfile;
+
+        setAuth(response.data.login);
         setUser(response.data.userData);
         setProfile = response.data.setProfile;
-        setAuth(response.data.login);
         localStorage.setItem("token", response.data.accessToken);
         localStorage.setItem("user", JSON.stringify(response.data.userData));
       })
       .catch(function (error) {
         console.log(error);
       });
-    console.log(access);
+
     return access;
   };
 

@@ -18,10 +18,12 @@ const Auth = () => {
     e.preventDefault();
 
     const check = await auth.login(email, password);
-    if (check) {
-      Navigate("/setprofile");
-    } else{
-      Navigate("/chats")
+    if (check.access) {
+      if (!check.setProfile) {
+        Navigate("/setprofile");
+      } else {
+        Navigate("/chats");
+      }
     }
   };
   return (

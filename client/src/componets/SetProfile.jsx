@@ -11,8 +11,8 @@ const SetProfile = () => {
   const auth = useAuth();
 
   const handelSubmit = (e) => {
-    console.log("send some profile data");
     e.preventDefault();
+    console.log("send some profile data");
     console.log(auth.user._id);
     const user = auth.user;
 

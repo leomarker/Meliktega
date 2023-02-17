@@ -5,6 +5,8 @@ const { Server } = require("socket.io");
 const http = require("http");
 const cors = require("cors");
 const env = require("dotenv").config();
+const session = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
 
 //routes
 
@@ -16,8 +18,23 @@ const app = express();
 const PORT = "5000";
 const server = http.createServer(app);
 
+const mongoDBStore = new MongoDBStore({
+  uri: "mongodb://127.0.0.1:27017/meliktega",
+  collection: "sessions",
+});
+
 app.use(express.json({ extended: false }));
 app.use(cors());
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    name: "sessionid",
+    resave: false,
+    store: mongoDBStore,
+    saveUninitialized: false,
+    cookie: { secure: true, maxAge: 1000 * 60 * 60 * 3 },
+  })
+);
 
 //establishing io connection
 

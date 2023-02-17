@@ -1,4 +1,4 @@
-const User = require("../model/authModel");
+const User = require("../model/user");
 const Profile = require("../model/profile");
 
 const bcrypt = require("bcrypt");
@@ -41,10 +41,9 @@ exports.postSignup = async (req, res, next) => {
 };
 
 exports.postLogin = async (req, res, next) => {
+  let setProfile = false;
   const { email, password } = req.body;
   const validationErrors = validationResult(req);
-
-  let setProfile = true;
 
   const user = await User.findOne({ email: email });
   console.log(user);
@@ -52,37 +51,17 @@ exports.postLogin = async (req, res, next) => {
     const userID = user.id.valueOf();
     const match = await bcrypt.compare(password, user.password);
     if (match) {
-      const accessToken = jwt.sign(
-        { email: email },
-        process.env.Access_Token_Secret,
-        { expiresIn: "1h" }
-      );
-      const refreshToken = jwt.sign(
-        { email: email },
-        process.env.Refresh_Token_Secret,
-        { expiresIn: "24h" }
-      );
-
-      res.cookie("jwt", refreshToken, {
-        httpOnly: true,
-        sameSite: "None",
-        secure: true,
-        maxAge: 24 * 60 * 60 * 1000,
-      });
-
+      req.session.user = user;
       let userName = await Profile.find({ userId: userID });
       console.log(userName);
       if (userName) {
-        setProfile = false;
+        setProfile = true;
         userName = userName[0].userName;
       }
 
-      const userData = { _id: userID, email: user.email };
-
-      // save the refresh token to database
+      const userData = { id: userID, email: user.email };
       return res.json({
         login: true,
-        accessToken: accessToken,
         userData,
         setProfile,
       });
