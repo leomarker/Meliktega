@@ -52,14 +52,14 @@ exports.postLogin = async (req, res, next) => {
     const match = await bcrypt.compare(password, user.password);
     if (match) {
       req.session.user = user;
-      let userName = await Profile.find({ userId: userID });
+      let userName = await Profile.findOne({ userId: userID });
       console.log(userName);
       if (userName) {
         setProfile = true;
-        userName = userName[0].userName;
+        userName = userName.userName;
       }
 
-      const userData = { id: userID, email: user.email };
+      const userData = { id: userID, email: user.email, userName: userName };
       return res.json({
         login: true,
         userData,

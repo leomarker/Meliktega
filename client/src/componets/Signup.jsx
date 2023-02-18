@@ -21,10 +21,11 @@ const Signup = () => {
         confirmPassword: confirmPassword,
       })
       .then(function (response) {
-        if(response.redirect){
-        navigate("/login", { replace: true });
-        console.log(response.data);
-      }
+        console.log(response);
+        if (response.data.redirect) {
+          navigate("/login", { replace: true });
+          console.log(response.data);
+        }
       })
       .catch(function (error) {
         console.log(error);

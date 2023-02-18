@@ -8,29 +8,33 @@ import ChatFooter from "./ChatFooter";
 const ChatUi = ({ socket }) => {
   const auth = useAuth();
   const user = auth.user;
-  const [sentMessages, setSentMessages] = useState([]);
-  const [messageResponse, setMessageResponse] = useState([]);
-  console.log(user);
-  console.log(sentMessages);
+  const [messages, setMessages] = useState([]);
+
+  // useEffect(() => {
+  //   socket.on("messageResponse", (data) => {
+  //     setMessages([...messages, data]);
+  //     console.log(data);
+  //   });
+  // }, [socket, messages]);
 
   useEffect(() => {
     socket.on("messageResponse", (data) =>
-      setMessageResponse([...messageResponse, data])
+      setMessages((mess) => [...mess, data])
     );
-  }, [socket, messageResponse]);
-  console.log(messageResponse);
+  }, [socket]);
+
   return (
     <div className="flex h-[100vh]">
       <ChatBar />
       <div className="bg-slate w-full h-full  relative">
-        <div className="bg-slateMinus w-full h-[4rem] navbar"></div>
+        {/* <div className="bg-slateMinus w-full h-[4rem] navbar"></div> */}
 
         <div className="py-[10px] w-full absolute bottom-[0]">
-          <ChatBody messageResponse={messageResponse} />
+          <ChatBody messages={messages} />
           <ChatFooter
             socket={socket}
-            setSentMessages={setSentMessages}
-            sentMessages={sentMessages}
+            setMessages={setMessages}
+            messages={messages}
           />
         </div>
       </div>

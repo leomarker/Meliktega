@@ -22,12 +22,11 @@ export const AuthProvider = ({ children }) => {
         console.log(response);
         access.access = response.data.login;
         access.setProfile = response.data.setProfile;
-
         setAuth(response.data.login);
         setUser(response.data.userData);
         setProfile = response.data.setProfile;
-        localStorage.setItem("token", response.data.accessToken);
         localStorage.setItem("user", JSON.stringify(response.data.userData));
+        localStorage.setItem("auth", JSON.stringify(response.data.login));
       })
       .catch(function (error) {
         console.log(error);

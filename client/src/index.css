@@ -122,3 +122,6 @@ button:focus-visible {
   border-radius: 50%;
   margin-left: 10px;
 }
+.navbar {
+  z-index: 10;
+}

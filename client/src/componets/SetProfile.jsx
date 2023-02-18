@@ -20,7 +20,7 @@ const SetProfile = () => {
       .post("/api/setProfile", {
         name: name,
         userName: userName,
-        userId: auth.user._id,
+        userId: auth.user.id,
       })
       .then(function (response) {
         console.log(response);
