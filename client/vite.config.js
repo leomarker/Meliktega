@@ -8,6 +8,7 @@ export default defineConfig({
       "/api/signup": "http://localhost:5000/",
       "/api/login": "http://localhost:5000/",
       "/api/setProfile": "http://localhost:5000/",
+      "/api/searchuser": "http://localhost:5000/",
     },
   },
   plugins: [react()],

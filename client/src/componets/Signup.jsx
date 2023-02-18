@@ -84,7 +84,7 @@ const Signup = () => {
         </div>
         <div>
           <button
-            className="bg-gradient-to-r from-cyan-500 to-blue-500"
+            className="btn bg-gradient-to-r from-cyan-500 to-blue-500"
             type="submit"
           >
             Create Account

@@ -56,7 +56,7 @@ const SetProfile = () => {
               className="w-[400px] h-[40px] mb-[20px] rounded-xl p-[10px]"
               onChange={(e) => setUsername(e.target.value)}
             />
-            <button className=" bg-gradient-to-r from-cyan-500 to-blue-500">
+            <button className="btn bg-gradient-to-r from-cyan-500 to-blue-500">
               set profile
             </button>
           </form>

@@ -33,7 +33,7 @@ const ChatFooter = ({ socket, setMessages, messages }) => {
           }}
           value={message}
         />
-        <button className="chat-btn">Send</button>
+        <button className="btn chat-btn">Send</button>
       </form>
     </div>
   );

@@ -70,7 +70,7 @@ const Auth = () => {
           <div className="mb-[40px] bg-gradient-to-r from-cyan-500 to-blue-500  text-transparent bg-clip-text float-right">
             <p> Forgot password?</p>
           </div>
-          <button className=" bg-gradient-to-r from-cyan-500 to-blue-500">
+          <button className="btn bg-gradient-to-r from-cyan-500 to-blue-500">
             SignIn
           </button>
         </form>

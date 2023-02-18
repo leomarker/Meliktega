@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 const ChatBar = () => {
+  const [searchUser, setSearchUser] = useState("");
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    await axios
+      .post("/api/searchuser", {
+        userName: searchUser,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <div className="bg-slate w-[4rem] h-full flex flex-col">
@@ -50,15 +67,22 @@ const ChatBar = () => {
       <div className="bg-slateMinus w-[20rem] h-full">
         <div className="p-[20px]">
           {" "}
-          <form action="">
+          <form className="flex" onSubmit={handleSearch}>
             <input
               type="text"
-              placeholder="search"
-              className="bg-slatePlus w-[18rem] h-[2rem] p-[10px] bg-stone-700"
+              placeholder="@username"
+              name="userName"
+              className="bg-slatePlus w-[14rem] h-[2rem] p-[10px] "
+              onChange={(e) => {
+                setSearchUser(e.target.value);
+              }}
             />
+            <button className="find w-[4rem] h-[2rem] bg-slatePlus ">
+              Find
+            </button>
           </form>
         </div>
-        <onlineUsers />
+        {/* <onlineUsers /> */}
       </div>
     </>
   );

@@ -18,7 +18,7 @@ const Welcome = () => {
         </div>
         <div>
           <Link to="/login">
-            <button className=" bg-gradient-to-r from-cyan-500 to-blue-500">
+            <button className="btn bg-gradient-to-r from-cyan-500 to-blue-500">
               Start Chat
             </button>
           </Link>

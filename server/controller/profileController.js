@@ -29,3 +29,17 @@ exports.setProfile = async (req, res, next) => {
     return res.json("fill the input");
   }
 };
+
+exports.findUser = async (req, res, next) => {
+  const userName = req.body.userName;
+
+  const user = await Profile.findOne({ userName: userName });
+
+  if (user) {
+    return res.status(200).json({ user });
+  } else {
+    return res.json({ msg: "no user found" });
+  }
+
+  console.log(user);
+};
