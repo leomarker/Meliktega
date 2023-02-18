@@ -1,6 +1,6 @@
 import React from "react";
 
-const ChatBody = ({ messages }) => {
+const ChatBody = ({ messages, lastMessageRef }) => {
   const username = JSON.parse(localStorage.getItem("user")).userName;
 
   console.log(messages);
@@ -37,6 +37,7 @@ const ChatBody = ({ messages }) => {
             );
           }
         })}
+        <div ref={lastMessageRef}></div>
       </div>
     </div>
   );

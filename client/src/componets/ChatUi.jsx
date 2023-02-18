@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../hooks/useAuth";
 import ChatBar from "./ChatBar";
 import ChatBody from "./ChatBody";
@@ -7,21 +7,25 @@ import ChatFooter from "./ChatFooter";
 
 const ChatUi = ({ socket }) => {
   const auth = useAuth();
-  const user = auth.user;
+  const user = JSON.parse(localStorage.getItem("user"));
   const [messages, setMessages] = useState([]);
+  const lastMessageRef = useRef(null);
 
-  // useEffect(() => {
-  //   socket.on("messageResponse", (data) => {
-  //     setMessages([...messages, data]);
-  //     console.log(data);
-  //   });
-  // }, [socket, messages]);
+  console.log(user);
+
+  useEffect(() => {
+    socket.connect();
+  }, []);
 
   useEffect(() => {
     socket.on("messageResponse", (data) =>
       setMessages((mess) => [...mess, data])
     );
   }, [socket]);
+
+  useEffect(() => {
+    lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
     <div className="flex h-[100vh]">
@@ -30,7 +34,7 @@ const ChatUi = ({ socket }) => {
         {/* <div className="bg-slateMinus w-full h-[4rem] navbar"></div> */}
 
         <div className="py-[10px] w-full absolute bottom-[0]">
-          <ChatBody messages={messages} />
+          <ChatBody messages={messages} lastMessageRef={lastMessageRef} />
           <ChatFooter
             socket={socket}
             setMessages={setMessages}

@@ -7,12 +7,17 @@ const ChatFooter = ({ socket, setMessages, messages }) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const handleSend = (e) => {
     e.preventDefault();
-    socket.emit("message", {
-      content: message,
-      socketId: socket.id,
-      username: user.userName,
-    });
-    // setMessages([...messages, message]);
+    console.log(message);
+    console.log();
+    if (!(message === "")) {
+      socket.emit("message", {
+        content: message,
+        socketId: socket.id,
+        username: user.userName,
+      });
+      console.log("sadfsa");
+      // setMessages([...messages, message]);
+    }
     setMessage("");
   };
   return (
