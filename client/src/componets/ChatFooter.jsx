@@ -2,41 +2,44 @@ import React from "react";
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 
-const ChatFooter = ({ socket, setMessages, messages }) => {
+const ChatFooter = ({ socket, setMessages, messages, selectedChat }) => {
   const [message, setMessage] = useState("");
-  const user = JSON.parse(localStorage.getItem("user"));
   const handleSend = (e) => {
     e.preventDefault();
     console.log(message);
     console.log();
     if (!(message === "")) {
-      socket.emit("message", {
+      socket.emit("private-message", {
         content: message,
-        socketId: socket.id,
-        username: user.userName,
+        to: selectedChat,
       });
       console.log("sadfsa");
       // setMessages([...messages, message]);
     }
     setMessage("");
   };
-  return (
-    <div>
-      {" "}
-      <form action="" className="flex" onSubmit={handleSend}>
-        <input
-          type="text"
-          placeholder="Write a message"
-          className="w-full bg-slatePlus p-[10px]"
-          onChange={(e) => {
-            setMessage(e.target.value);
-          }}
-          value={message}
-        />
-        <button className="btn chat-btn">Send</button>
-      </form>
-    </div>
-  );
+
+  if (selectedChat) {
+    return (
+      <div>
+        {" "}
+        <form action="" className="flex" onSubmit={handleSend}>
+          <input
+            type="text"
+            placeholder="Write a message"
+            className="w-full bg-slatePlus p-[10px]"
+            onChange={(e) => {
+              setMessage(e.target.value);
+            }}
+            value={message}
+          />
+          <button className="btn chat-btn">Send</button>
+        </form>
+      </div>
+    );
+  } else {
+    return <div></div>;
+  }
 };
 
 export default ChatFooter;

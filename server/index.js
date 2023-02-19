@@ -69,8 +69,9 @@ io.on("connection", (socket) => {
     io.emit("users", users);
   });
 
-  socket.on("message", (data) => {
+  socket.on("private-message", (data) => {
     console.log(data);
+    const to = data.to.user.userName;
     io.emit("messageResponse", data);
   });
 });
