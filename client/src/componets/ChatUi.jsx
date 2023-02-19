@@ -6,15 +6,16 @@ import ChatBody from "./ChatBody";
 import ChatFooter from "./ChatFooter";
 
 const ChatUi = ({ socket }) => {
-  const auth = useAuth();
   const user = JSON.parse(localStorage.getItem("user"));
   const [messages, setMessages] = useState([]);
   const lastMessageRef = useRef(null);
+  const [users, setUsers] = useState([]);
 
   console.log(user);
 
   useEffect(() => {
     socket.connect();
+    socket.emit("users", { user });
   }, []);
 
   useEffect(() => {
@@ -27,9 +28,14 @@ const ChatUi = ({ socket }) => {
     lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  useEffect(() => {
+    socket.on("users", (data) => {
+      setUsers(data);
+    });
+  });
   return (
     <div className="flex h-[100vh]">
-      <ChatBar />
+      <ChatBar users={users} />
       <div className="bg-slate w-full h-full  relative">
         {/* <div className="bg-slateMinus w-full h-[4rem] navbar"></div> */}
 

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import OnlineUsers from "./OnlineUsers";
 
-const ChatBar = () => {
+const ChatBar = ({ users }) => {
   const [searchUser, setSearchUser] = useState("");
 
   const handleSearch = async (e) => {
@@ -82,7 +83,7 @@ const ChatBar = () => {
             </button>
           </form>
         </div>
-        {/* <onlineUsers /> */}
+        <OnlineUsers users={users} />
       </div>
     </>
   );

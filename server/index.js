@@ -45,8 +45,29 @@ const io = new Server(server, {
   },
 });
 
+const users = [];
 io.on("connection", (socket) => {
   console.log(`a user connected with ${socket.id}`);
+
+  // console.log(socket.handshake.username, "sadfsad");
+  // for (let [id, socket] of io.of("/").sockets) {
+  //   users.push({
+  //     userID: id,
+  //     username: socket.username,
+  //   });
+  // }
+  socket.on("users", (data) => {
+    if (
+      !users.some((obj) => {
+        return obj.user.email === data.user.email;
+      })
+    ) {
+      users.push(data);
+    }
+
+    console.log(users);
+    io.emit("users", users);
+  });
 
   socket.on("message", (data) => {
     console.log(data);
