@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 
-const ChatFooter = ({ socket, setMessages, messages, selectedChat }) => {
+const ChatFooter = ({ socket, selectedChat }) => {
   const [message, setMessage] = useState("");
   const handleSend = (e) => {
     e.preventDefault();

@@ -43,39 +43,36 @@ exports.postSignup = async (req, res, next) => {
 exports.postLogin = async (req, res, next) => {
   let setProfile = false;
   const { email, password } = req.body;
-  const validationErrors = validationResult(req);
 
   const user = await User.findOne({ email: email });
-  console.log(user);
-  if (user) {
-    const userID = user.id.valueOf();
-    const match = await bcrypt.compare(password, user.password);
-    if (match) {
-      req.session.user = user;
-      let userSet = await Profile.findOne({ userId: userID });
-      console.log(userSet);
-      if (userSet) {
-        setProfile = true;
-      }
 
-      const userData = {
-        id: userID,
-        email: user.email,
-        userName: userSet.userName,
-        name: userSet.name,
-      };
-      return res.json({
-        login: true,
-        userData,
-        setProfile,
-      });
-    } else {
-      return res.json({ msg: "Invalid email or password" });
-    }
-  } else {
-    return res.send({
-      login: false,
-      message: "no user found with this email",
-    });
+  if (!user) {
+    return res.json({ msg: "Invalid email or password" });
   }
+
+  const userID = user.id.valueOf();
+  const match = await bcrypt.compare(password, user.password);
+
+  if (!match) {
+    return res.json({ msg: "Invalid email or password" });
+  }
+
+  req.session.user = user;
+  let userSet = await Profile.findOne({ userId: userID });
+
+  if (userSet) {
+    setProfile = true;
+  }
+
+  const userData = {
+    id: userID,
+    email: user.email,
+    userName: setProfile ? userSet.userName : null,
+    name: setProfile ? userSet.name : null,
+  };
+  return res.json({
+    login: true,
+    userData,
+    setProfile,
+  });
 };
