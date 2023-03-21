@@ -10,12 +10,13 @@ const ChatBody = ({ messages, lastMessageRef, selectedChat }) => {
       <div>
         <div className="message">
           {messages.map((message) => {
+            console.log(message.to.user.userName);
             if (message.to.user.userName !== username) {
               return (
                 <div className="message__outer">
                   <div className="message__inner">
                     <div className="message__avatar flex justify-center items-center">
-                      <p>A</p>
+                      <p>z</p>
                     </div>
                     <div className="message__bubble ml-[20px] mr-[10px] mb-[20px] p-[15px]">
                       {message.content}

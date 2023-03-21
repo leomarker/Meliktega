@@ -6,15 +6,11 @@ const ChatFooter = ({ socket, setMessages, messages, selectedChat }) => {
   const [message, setMessage] = useState("");
   const handleSend = (e) => {
     e.preventDefault();
-    console.log(message);
-    console.log();
     if (!(message === "")) {
       socket.emit("private-message", {
         content: message,
         to: selectedChat,
       });
-      console.log("sadfsa");
-      // setMessages([...messages, message]);
     }
     setMessage("");
   };
