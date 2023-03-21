@@ -29,24 +29,26 @@ const Auth = () => {
   return (
     <div className="auth flex items-center">
       <div className="login flex items-center justify-center h-[100%] w-[100%] flex-col">
-        <h2 className="h-[60px] text-5xl font-extrabold mb-[10px] bg-gradient-to-r from-cyan-500 to-blue-500  text-transparent bg-clip-text">
-          Login To Your Account{" "}
-        </h2>
+        <div className="h-[60px] mb-[30px]">
+          <h2 className="h-[100%] text-[2rem] welcome-text  sm:text-5xl font-extrabold mb-[10px] bg-gradient-to-r from-cyan-500 to-blue-500  text-transparent bg-clip-text">
+            Login To Your Account
+          </h2>
+        </div>
 
-        <div className="mb-[30px]">
+        {/* <div className="mb-[30px]">
           <h3 className="text-[1rem] font-normal">login with your socials</h3>
         </div>
-        <SocialIcons />
+        <SocialIcons /> */}
 
-        <p className="mb-[20px]">or</p>
+        {/* <p className="mb-[20px]">or</p> */}
 
         <form
           action=""
-          className="flex  items-center flex-col mb-[20px]"
+          className="flex items-center flex-col mb-[20px]"
           onSubmit={handleSubmit}
         >
-          <div className="w-[450px] h-[40px] mb-[40px]">
-            <label htmlFor="">Email</label>
+          <div className="w-[350px] sm:w-[450px] h-[40px] mb-[40px]">
+            <label>Email</label>
             <input
               type="text"
               placeholder="Melktega@gmail.com"
@@ -56,7 +58,7 @@ const Auth = () => {
               }}
             />
           </div>
-          <div className="w-[450px] h-[40px] mb-[40px]">
+          <div className="w-[350px] sm:w-[450px] h-[40px] mb-[40px]">
             <label htmlFor="">Password</label>
             <input
               type="password"
