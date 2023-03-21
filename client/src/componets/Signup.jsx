@@ -34,19 +34,19 @@ const Signup = () => {
 
   return (
     <div className="flex items-center justify-center h-[100vh] flex-col">
-      <div className="h-[60px] text-5xl font-extrabold mb-[10px] bg-gradient-to-r from-cyan-500 to-blue-500  text-transparent bg-clip-text">
+      <div className="h-[60px] text-[2rem] welcome-text sm:text-5xl font-extrabold mb-[10px] bg-gradient-to-r from-cyan-500 to-blue-500  text-transparent bg-clip-text">
         <p> Create An Account</p>
       </div>
-      <div className="mb-[20px]">
+      {/* <div className="mb-[20px]">
         <p>SignUp with your socials</p>
       </div>
       <SocialIcons />
-      <p className="mb-[10px]">or</p>
+      <p className="mb-[10px]">or</p> */}
       <form
         onSubmit={handleSubmit}
         className="flex justify-center items-center flex-col mb-[30px]"
       >
-        <div className="  w-[450px] h-[40px] mb-[30px]">
+        <div className="  w-[350px] sm:w-[450px] h-[40px] mb-[30px]">
           <label htmlFor="email">Email</label>
           <input
             type="text"
@@ -58,7 +58,7 @@ const Signup = () => {
             className=" w-full h-full p-[15px] rounded-2xl "
           />
         </div>
-        <div className="w-[450px] h-[40px] mb-[30px]">
+        <div className=" w-[350px] sm:w-[450px] h-[40px] mb-[30px]">
           <label htmlFor="email">Password</label>
           <input
             type="password"
@@ -70,8 +70,8 @@ const Signup = () => {
             className=" w-full h-full p-[15px]  rounded-2xl "
           />
         </div>
-        <div className="w-[450px] h-[40px] mb-[60px]">
-          <label htmlFor="email">Confirm Password</label>
+        <div className=" w-[350px] sm:w-[450px] h-[40px] mb-[60px]">
+          <label htmlFor="email">ConfirmPassword</label>
           <input
             type="password"
             name="confirmPassword"
