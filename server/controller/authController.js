@@ -4,7 +4,6 @@ const Profile = require("../model/profile");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
-const mongoose = require("mongoose");
 
 require("dotenv").config();
 
@@ -70,6 +69,7 @@ exports.postLogin = async (req, res, next) => {
     userName: setProfile ? userSet.userName : null,
     name: setProfile ? userSet.name : null,
   };
+
   return res.json({
     login: true,
     userData,
