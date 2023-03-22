@@ -62,7 +62,7 @@ exports.postLogin = async (req, res, next) => {
   if (userSet) {
     setProfile = true;
   }
-
+  const token = generateToken(user.email, user.id);
   const userData = {
     id: userID,
     email: user.email,
@@ -74,5 +74,18 @@ exports.postLogin = async (req, res, next) => {
     login: true,
     userData,
     setProfile,
+    token,
   });
+};
+
+generateToken = (email, userId) => {
+  const token = jwt.sign(
+    {
+      email: email,
+      userId: userId,
+    },
+    process.env.Access_Token_Secret,
+    { expiresIn: "15m" }
+  );
+  return token;
 };
