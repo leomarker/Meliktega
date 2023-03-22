@@ -79,6 +79,12 @@ exports.postLogin = async (req, res, next) => {
 };
 
 generateToken = (email, userId) => {
+  const accessToken = generateAccessToken(email, userId);
+  const refreshToken = generateRefreshToken(email, userId);
+  return { accessToken, refreshToken };
+};
+
+generateAccessToken = (email, userId) => {
   const token = jwt.sign(
     {
       email: email,
@@ -86,6 +92,18 @@ generateToken = (email, userId) => {
     },
     process.env.Access_Token_Secret,
     { expiresIn: "15m" }
+  );
+  return token;
+};
+
+generateRefreshToken = (email, userId) => {
+  const token = jwt.sign(
+    {
+      email: email,
+      userId: userId,
+    },
+    process.env.Refresh_Token_Secret,
+    { expiresIn: "7d" }
   );
   return token;
 };
