@@ -3,9 +3,9 @@ const jwt = require("jsonwebtoken");
 exports.verifytoken = (req, res, next) => {
   try {
     let token = req.header("Authorization");
-    const secret = "this is jwt";
+    const secret = process.env.Access_Token_Secret;
     if (!token) {
-      return res.redirect("/api/login");
+      return res.status(401).json({ msg: " authorization denied" });
     }
     if (token.startsWith("Bearer ")) {
       token = token.slice(7, token.length).trimLeft();
